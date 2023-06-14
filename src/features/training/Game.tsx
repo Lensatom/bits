@@ -44,7 +44,7 @@ const Game = () => {
               <span>{questions[questionNumber].secondNumber}</span>
             </p>
             {/* <p>Score: {score}</p> */}
-            <input id="inputField" value={userAnswer} onChange={changeUserAnswer} className='text-center rounded-md text-black w-28 py-2 font-medium text-lg'/>
+            <input type="number" id="inputField" value={userAnswer} onChange={changeUserAnswer} className='text-center rounded-md text-black w-28 py-2 font-medium text-lg'/>
           </div>
           <div className='w-full h-[65%] bg-gray-900 rounded-t-lg'>
 
