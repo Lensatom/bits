@@ -36,7 +36,7 @@ const Game = () => {
   if (status === "Ready!") {
     return (
       <div className='bg-gray-700 h-screen w-full flex justify-center items-center lg:py-16 lg:px-24'>
-        <div className='h-full w-full text-white flex flex-col justify-between pt-24 items-center gap-2 lg:shadow-lg lg:rounded-xl lg:bg-gray-900'>
+        <div className='h-full w-full text-white flex flex-col justify-start pt-24 items-center gap-2 lg:shadow-lg lg:rounded-xl lg:bg-gray-900'>
           <div className='flex flex-col items-center gap-2'>
             <p className='flex gap-1 font-medium text-3xl items-center'>
               <span>{questions[questionNumber].firstNumber}</span>
@@ -45,9 +45,6 @@ const Game = () => {
             </p>
             {/* <p>Score: {score}</p> */}
             <input type="number" id="inputField" value={userAnswer} onChange={changeUserAnswer} className='text-center rounded-md text-black w-28 py-2 font-medium text-lg'/>
-          </div>
-          <div className='w-full h-[65%] bg-gray-900 rounded-t-lg'>
-
           </div>
         </div>
       </div>
