@@ -45,7 +45,7 @@ const Game = () => {
   }
 
   const changeUserAnswer = (answer:string) => {
-    if (status === "End!") {
+    if (status !== "End!") {
       setUserAnswer(answer);
       if (answer.length === questions[questionNumber].answer.toString().length) {
         if (answer == questions[questionNumber].answer) {
