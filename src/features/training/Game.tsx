@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import { GenerateQuestions } from '../../helpers/GenerateQuestions'
+import { BiTime } from 'react-icons/bi'
+import { BsCheck } from 'react-icons/bs'
 
 const Game = () => {
 
@@ -30,6 +32,11 @@ const Game = () => {
     let localTime = time;
     const interval = setInterval(() => {
       if (timer && localTime >= 0) {
+        if (localTime < 50) {
+          timer.style.color = "red";
+          timer.style.fontSize = "20px"
+          timer.style.fontWeight = "bolder"
+        }
         timer.innerText = `${localTime / 1000}s`
         localTime = localTime - 1000
       } else {
@@ -70,8 +77,15 @@ const Game = () => {
   if (status !== "Loading...") {
     return (
       <div id="container" className='bg-white h-screen w-full flex flex-col justify-between items-center lg:py-16 lg:px-24'>
-        <div className='py-2'>
-          <p id="timer" className='h-2 justify-end rounded-full'></p>
+        <div className='w-full py-2 flex justify-between px-3 text-lg font-medium'>
+          <p className='flex items-center gap-1'>
+            <BiTime />
+            <span id="timer"></span>
+          </p>
+          <p className='flex items-center gap-1'>
+            <BsCheck />
+            <span>{score}</span>
+          </p>
         </div>
         <div className='flex flex-col items-center gap-4 text-gray-900'>
           <p className='flex gap-1 font-bold text-5xl items-center'>
@@ -83,20 +97,20 @@ const Game = () => {
           </p>
         </div>
         <div className='w-full h-[50%] flex flex-col items-start'>
-          <div className="w-full h-full grid grid-cols-3 grid-rows-5 font-bold text-xl gap-4 p-4 text-white">
-            <button onClick={() => setUserAnswer(`${userAnswer}7`)} className='bg-gray-700 rounded-md'>7</button>
-            <button onClick={() => setUserAnswer(`${userAnswer}8`)} className='bg-gray-700 rounded-md'>8</button>
-            <button onClick={() => setUserAnswer(`${userAnswer}9`)} className='bg-gray-700 rounded-md'>9</button>
-            <button onClick={() => setUserAnswer(`${userAnswer}4`)} className='bg-gray-700 rounded-md'>4</button>
-            <button onClick={() => setUserAnswer(`${userAnswer}5`)} className='bg-gray-700 rounded-md'>5</button>
-            <button onClick={() => setUserAnswer(`${userAnswer}6`)} className='bg-gray-700 rounded-md'>6</button>
-            <button onClick={() => setUserAnswer(`${userAnswer}1`)} className='bg-gray-700 rounded-md'>1</button>
-            <button onClick={() => setUserAnswer(`${userAnswer}2`)} className='bg-gray-700 rounded-md'>2</button>
-            <button onClick={() => setUserAnswer(`${userAnswer}3`)} className='bg-gray-700 rounded-md'>3</button>
-            <button onClick={() => setUserAnswer(`${userAnswer}-`)} className='bg-gray-700 rounded-md'>-</button>
-            <button onClick={() => setUserAnswer(`${userAnswer}0`)} className='bg-gray-700 rounded-md'>0</button>
-            <button onClick={() => setUserAnswer("")} className='bg-gray-600 rounded-md'>C</button>
-            <button onClick={submitUserAnswer} className='bg-orange-700 rounded-md col-span-3'>Enter</button>
+          <div className="w-full h-full grid grid-cols-3 grid-rows-5 font-bold text-2xl gap-4 p-4 text-gray-900">
+            <button onClick={() => setUserAnswer(`${userAnswer}7`)} className='bg-gray-200 rounded-md'>7</button>
+            <button onClick={() => setUserAnswer(`${userAnswer}8`)} className='bg-gray-200 rounded-md'>8</button>
+            <button onClick={() => setUserAnswer(`${userAnswer}9`)} className='bg-gray-200 rounded-md'>9</button>
+            <button onClick={() => setUserAnswer(`${userAnswer}4`)} className='bg-gray-200 rounded-md'>4</button>
+            <button onClick={() => setUserAnswer(`${userAnswer}5`)} className='bg-gray-200 rounded-md'>5</button>
+            <button onClick={() => setUserAnswer(`${userAnswer}6`)} className='bg-gray-200 rounded-md'>6</button>
+            <button onClick={() => setUserAnswer(`${userAnswer}1`)} className='bg-gray-200 rounded-md'>1</button>
+            <button onClick={() => setUserAnswer(`${userAnswer}2`)} className='bg-gray-200 rounded-md'>2</button>
+            <button onClick={() => setUserAnswer(`${userAnswer}3`)} className='bg-gray-200 rounded-md'>3</button>
+            <button onClick={() => setUserAnswer(`${userAnswer}-`)} className='bg-gray-200 rounded-md'>-</button>
+            <button onClick={() => setUserAnswer(`${userAnswer}0`)} className='bg-gray-200 rounded-md'>0</button>
+            <button onClick={() => setUserAnswer("")} className='bg-orange-200 text-gray-900 rounded-md'>C</button>
+            <button onClick={submitUserAnswer} className='bg-orange-600 text-white rounded-md col-span-3'>Enter</button>
           </div>
         </div>
       </div>
