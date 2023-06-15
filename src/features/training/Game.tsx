@@ -8,7 +8,7 @@ const Game = () => {
   const [status, setStatus] = useState("Loading...")
   const [userAnswer, setUserAnswer] = useState<any>("")
   const [score, setScore] = useState(0);
-  const [time, setTime] = useState(60000);
+  const time = 60000;
 
   useEffect(() => {
     let localQuestions:any = []
