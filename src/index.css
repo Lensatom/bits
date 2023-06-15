@@ -31,3 +31,7 @@
     transform: scale(100%);
   }
 }
+
+.keys {
+  background-color: rgba(100, 100, 100, .1);
+}
