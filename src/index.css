@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@keyframes success {
+  0% {
+    border: 5px solid white
+  } 50% {
+    border: 5px solid green
+  } 100% {
+    border: 5px solid white
+  }
+}
+
+@keyframes fail {
+  0% {
+    border: 5px solid white
+  } 50% {
+    border: 5px solid red
+  } 100% {
+    border: 5px solid white
+  }
+}
