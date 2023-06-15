@@ -28,15 +28,11 @@ const Game = () => {
   }, [])
 
   const startTime = () => {
-    const timer = document.getElementById("timer")
     let localTime = time;
+    const timer = document.getElementById("timer")
     const interval = setInterval(() => {
       if (timer && localTime >= 0) {
-        if (localTime < 50) {
-          timer.style.color = "red";
-          timer.style.fontSize = "20px"
-          timer.style.fontWeight = "bolder"
-        }
+        
         timer.innerText = `${localTime / 1000}s`
         localTime = localTime - 1000
       } else {
@@ -44,6 +40,15 @@ const Game = () => {
         endGame()
       }
     }, 1000)
+    const timeOut = setTimeout(() => {
+      if (timer) {
+        timer.style.color = "red";
+        timer.style.fontSize = "20px"
+        timer.style.fontWeight = "bolder"
+        timer.style.animation = "pulse 1s infinite"
+      }
+      clearTimeout(timeOut)
+    }, 51000)
   }
 
   const endGame = () => {
