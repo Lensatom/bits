@@ -36,15 +36,29 @@ const Game = () => {
   if (status === "Ready!") {
     return (
       <div className='bg-gray-700 h-screen w-full flex justify-center items-center lg:py-16 lg:px-24'>
-        <div className='h-full w-full text-white flex flex-col justify-start pt-24 items-center gap-2 lg:shadow-lg lg:rounded-xl lg:bg-gray-900'>
-          <div className='flex flex-col items-center gap-2'>
-            <p className='flex gap-1 font-medium text-3xl items-center'>
+        <div className='h-full w-full text-white flex flex-col justify-between pt-24 items-center gap-2 lg:shadow-lg lg:rounded-xl lg:bg-gray-900'>
+          <div className='flex flex-col items-center gap-4'>
+            <p className='flex gap-1 font-bold text-5xl items-center'>
               <span>{questions[questionNumber].firstNumber}</span>
               <span>{questions[questionNumber].operation}</span>
               <span>{questions[questionNumber].secondNumber}</span>
             </p>
             {/* <p>Score: {score}</p> */}
-            <input type="number" id="inputField" value={userAnswer} onChange={changeUserAnswer} className='text-center rounded-md text-black w-28 py-2 font-medium text-lg'/>
+            <input type="number" id="inputField" value={userAnswer} onChange={changeUserAnswer} className='text-center skew-x-[-12deg] rounded-md text-black w-44 py-6 font-bold text-xl'/>
+          </div>
+          <div className="w-full bg-gray-800 h-[60%] grid grid-cols-3 grid-rows-4 font-bold text-xl gap-4 p-4">
+            <button className='bg-gray-700 rounded-md'>7</button>
+            <button className='bg-gray-700 rounded-md'>8</button>
+            <button className='bg-gray-700 rounded-md'>9</button>
+            <button className='bg-gray-700 rounded-md'>4</button>
+            <button className='bg-gray-700 rounded-md'>5</button>
+            <button className='bg-gray-700 rounded-md'>6</button>
+            <button className='bg-gray-700 rounded-md'>1</button>
+            <button className='bg-gray-700 rounded-md'>2</button>
+            <button className='bg-gray-700 rounded-md'>3</button>
+            <button className='bg-orange-800 col-span-2 rounded-md'>0</button>
+            <button className='bg-gray-700 rounded-md'>-</button>
+            <button></button>
           </div>
         </div>
       </div>
