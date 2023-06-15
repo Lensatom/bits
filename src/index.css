@@ -4,20 +4,20 @@
 
 @keyframes success {
   0% {
-    border: 5px solid white
+    background-color: white
   } 50% {
-    border: 5px solid green
+    background-color: lightgreen
   } 100% {
-    border: 5px solid white
+    background-color: white
   }
 }
 
 @keyframes fail {
   0% {
-    border: 5px solid white
+    background-color: white
   } 50% {
-    border: 5px solid red
+    background-color: rgba(200, 0, 0, .3)
   } 100% {
-    border: 5px solid white
+    background-color: white
   }
 }

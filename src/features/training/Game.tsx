@@ -49,16 +49,21 @@ const Game = () => {
       const container = document.getElementById("container")
       if (userAnswer == questions[questionNumber].answer) {
         if (container) {
-          container.style.animation = "success 1s forwards"
+          container.style.animation = "success .5s forwards"
         }
         setScore(score + 5)
       } else {
         if (container) {
-          container.style.animation = "fail 1s forwards"
+          container.style.animation = "fail .5s forwards"
         }
       }
       setUserAnswer("")
       setQuestionNumber(questionNumber + 1)
+      if (container) {
+        setTimeout(() => {
+          container.style.animation = "none"
+        }, 500)
+      }
     }
   }
 
