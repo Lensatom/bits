@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { GenerateQuestions } from '../../helpers/GenerateQuestions'
-import { BiArrowBack, BiTime } from 'react-icons/bi'
+import { BiTime } from 'react-icons/bi'
 import { BsCheck } from 'react-icons/bs'
 import { NumberPad } from '../../components'
 

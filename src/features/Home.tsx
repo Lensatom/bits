@@ -1,15 +1,10 @@
 import { useState } from 'react'
-import { FaChartBar, FaChartLine, FaHome, FaPeopleArrows, FaToolbox, FaTrophy, FaUser } from 'react-icons/fa'
+import { FaChartBar, FaHome, FaToolbox, FaTrophy } from 'react-icons/fa'
 import Penguin from '../assets/tiger.gif'
 
 const Home = () => {
 
   const [status, setStatus] = useState("")
-  const style = {
-    backgroundImage: 'url(https://cdn.dribbble.com/users/1068771/screenshots/6520292/pilot_with_back_s_4x.jpg?resize=400x0)',
-    backgroundSize: 'cover',
-    backgroundPosition: 'center'
-  }
 
   if (status === "Ready!") {
     return (
