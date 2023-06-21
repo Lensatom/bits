@@ -138,7 +138,7 @@ const Game = () => {
           <h2 className='text-2xl font-bold text-gray-700'>{score}</h2>
           <p className='text-md font-bold text-gray-700'>Points</p>
         </div>
-        <NavLink to="/selectGame" className="px-10 py-3 bg-orange-700 text-white rounded-md font-medium"><Back></Back></NavLink>
+        <NavLink to="/selectGame" className="px-10 py-3 bg-orange-700 text-white rounded-md font-medium">Back</NavLink>
       </div>
     )
   } else {
