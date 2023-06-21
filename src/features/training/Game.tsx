@@ -138,8 +138,7 @@ const Game = () => {
           <h2 className='text-2xl font-bold text-gray-700'>{score}</h2>
           <p className='text-md font-bold text-gray-700'>Points</p>
         </div>
-        <button onClick={() => {location.reload()}} className="px-10 py-3 bg-orange-700 text-white rounded-md font-medium mt-10">Play again</button>
-        <NavLink to="/selectGame" className="px-10 py-3 bg-orange-700 text-white rounded-md font-medium">Exit</NavLink>
+        <NavLink to="/selectGame" className="px-10 py-3 bg-orange-700 text-white rounded-md font-medium"><Back></Back></NavLink>
       </div>
     )
   } else {
