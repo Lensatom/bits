@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react'
 import { GenerateQuestions } from '../../helpers/GenerateQuestions'
 import { BiTime } from 'react-icons/bi'
 import { BsCheck } from 'react-icons/bs'
-import { NumberPad } from '../../components'
+import { Loader, NumberPad } from '../../components'
+import { NavLink } from 'react-router-dom'
 
 const Game = () => {
 
@@ -11,20 +12,24 @@ const Game = () => {
   const [status, setStatus] = useState("Loading...")
   const [userAnswer, setUserAnswer] = useState<any>("")
   const [score, setScore] = useState(0);
+  const [count, setCount] = useState(3);
   const time = 60000;
 
   useEffect(() => {
     let localQuestions:any = []
+    setScore(0)
+    setQuestionNumber(0)
+    setCount(3)
+    setUserAnswer("")
     for (let i = 0; i < 100; i++) {
       localQuestions = [...localQuestions, GenerateQuestions()]
     }
-    console.log(localQuestions)
     setQuestions(localQuestions)
     setTimeout(() => {
       setStatus("Ready!")
       setTimeout(() => {
         startTime()
-      }, 1000)
+      }, 5000)
     }, 3000)
   }, [])
 
@@ -32,13 +37,12 @@ const Game = () => {
     let localTime = time;
     const timer = document.getElementById("timer")
     const interval = setInterval(() => {
-      if (timer && localTime >= 0) {
-        
+      if (timer && localTime >= 1000) {
         timer.innerText = `${localTime / 1000}s`
         localTime = localTime - 1000
       } else {
-        clearInterval(interval)
         endGame()
+        clearInterval(interval)
       }
     }, 1000)
     const timeOut = setTimeout(() => {
@@ -54,7 +58,6 @@ const Game = () => {
 
   const endGame = () => {
     setStatus("End!")
-    setUserAnswer("End of Game")
   }
 
   const changeUserAnswer = (answer:string) => {
@@ -84,7 +87,7 @@ const Game = () => {
     }
   }
 
-  if (status !== "Loading...") {
+  if (status === "Start!") {
     return (
       <div id="container" className='bg-white h-screen w-full flex flex-col justify-between items-center lg:py-16 lg:px-24'>
         <div className='w-full py-2 flex justify-between px-3 text-lg font-medium'>
@@ -113,8 +116,34 @@ const Game = () => {
         />
       </div>
     )
+  } else if (status === "Ready!") {
+    const interval = setInterval(() => {
+      setCount(count - 1)
+      if (count === 0) {
+        setStatus("Start!")
+        clearInterval(interval)
+      }
+    }, 1000)
+    return (
+      <div className='w-full h-screen flex justify-center items-center'>
+        <p className='text-xl font-medium'>{count === 0 ? "GO!" : count}</p>
+      </div>
+    )
+  } else if (status === "End!") {
+    return (
+      <div className='w-full h-screen flex flex-col justify-center items-center gap-4'>
+        <h2 className='text-3xl font-semibold'>Nice game!</h2>
+        <p className='text-orange-700'>You scored a whooping</p>
+        <div className='flex items-end gap-1'>
+          <h2 className='text-2xl font-bold text-gray-700'>{score}</h2>
+          <p className='text-md font-bold text-gray-700'>Points</p>
+        </div>
+        <button onClick={() => {location.reload()}} className="px-10 py-3 bg-orange-700 text-white rounded-md font-medium mt-10">Play again</button>
+        <NavLink to="/selectGame" className="px-10 py-3 bg-orange-700 text-white rounded-md font-medium">Exit</NavLink>
+      </div>
+    )
   } else {
-    return <>Loading...</>
+    return <Loader message="Setting up game environment" />
   }
 }
 
