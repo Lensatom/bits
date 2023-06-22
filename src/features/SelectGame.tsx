@@ -24,14 +24,14 @@ const SelectGame = () => {
               Play against different people from different countries online and get to rank on world leaderboard.
             </p>
           </div>
-          <div className='bg-green-200 rounded-md overflow-hidden shadow-lg'>
+          <div  onClick={() => navigate('/multi/horj')} className='bg-green-200 rounded-md overflow-hidden shadow-lg'>
             <h2 className='flex items-center gap-2 text-xl font-medium p-2 bg-green-800 text-white'><BsPeople /> Multiplayer</h2>
             <img className='w-full' src="https://img.freepik.com/premium-vector/cute-couple-boy-playing-game-cartoon-vector-icon-illustration-people-technology-icon-concept-isolated-premium-vector-flat-cartoon-style_138676-3966.jpg" />
             <p className='px-4 py-8 font-medium text-gray-700'>
               Create your personal game room and play against your friends by sharing your unique room key code.
             </p>
           </div>
-          <div onClick={() => navigate('/game')} className='bg-orange-200 rounded-md overflow-hidden shadow-lg'>
+          <div onClick={() => navigate('/train/game')} className='bg-orange-200 rounded-md overflow-hidden shadow-lg'>
             <h2 className='flex items-center gap-2 text-xl font-medium p-2 bg-orange-800 text-white'><FaUser classNme="text-md" /> Training</h2>
             <img className='w-full' src="https://i.pinimg.com/originals/b0/41/ed/b041ed6928738a65269be01d7dac2c82.jpg" />
             <p className='px-4 py-8 font-medium text-gray-700'>

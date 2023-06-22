@@ -1,0 +1,1 @@
+export { default as Horj } from './Horj'

@@ -9,7 +9,7 @@ const Loader = (props:Props) => {
   const { message } = props;
 
   return (
-    <div className='w-full h-screen flex flex-col justify-center items-center'>
+    <div className='w-full h-full flex flex-col justify-center items-center'>
       <img src={LoaderAnimation} />
       <p className='text-sm font-medium text-gray-700 mt-[-30px]'>{message}</p>
     </div>
