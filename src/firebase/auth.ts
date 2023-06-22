@@ -5,8 +5,8 @@ import { AddData } from "./firestore";
 const auth = getAuth(FirebaseApp)
 
 // Get current user
-export const GetCurrentUser = () => {
-  onAuthStateChanged(auth, (user) => {
+export const GetCurrentUser = async () => {
+  const response = await onAuthStateChanged(auth, (user) => {
     if (user) {
       const uid = user.uid;
       return uid
@@ -14,6 +14,7 @@ export const GetCurrentUser = () => {
       return (null)
     }
   })
+  return response
 }
 
 // Sign up new user

@@ -15,7 +15,7 @@ const Login = () => {
 
   return (
     <div className="w-full h-screen flex flex-col justify-center items-center py-10 px-3">
-      <h2 className="text-xl font-semibold text-orange-700">Hello mate!</h2>
+      <h2 className="text-xl font-semibold text-orange-700">Hello mate 🚀</h2>
       <p className="text-gray-700">Let's get you logged-in</p>
       <form onSubmit={submit} className="flex flex-col gap-2 mt-10 w-full border-t-[1px] pt-10">
         <label className=" font-medium text-gray-700">Email</label>

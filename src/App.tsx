@@ -2,17 +2,22 @@ import { useEffect } from 'react'
 import { Routes, Route, useNavigate } from 'react-router-dom'
 import { Home, Login, Register, SelectGame } from './features'
 import { Game } from './features/training'
-import { GetCurrentUser } from './firebase/auth'
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 function App() {
 
   const navigate = useNavigate()
 
   useEffect(() => {
-    const user = GetCurrentUser()
-    if (user === null) {
-      navigate("/login")
-    } else {}
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const uid = user.uid;
+        return uid
+      } else {
+        navigate("/login")
+      }
+    })
   }, [])
 
   return (
