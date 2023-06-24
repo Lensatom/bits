@@ -36,7 +36,9 @@ const Rooms = () => {
     const room = rooms.filter((room:any) => room.hostId === id)[0];
     const players = []
     room.players.map((player:any) => {
-      players.push(player)
+      if (player.name !== userData.username) {
+        players.push(player)
+      }
     })
     players.push(
       {
