@@ -1,6 +1,5 @@
-import { getFirestore, doc, setDoc, getDoc, addDoc, collection, updateDoc, where, query, onSnapshot } from "firebase/firestore";
+import { getFirestore, doc, setDoc, getDoc, addDoc, collection, updateDoc, where, query } from "firebase/firestore";
 import { FirebaseApp } from "./init";
-import { SaveRoom } from "../redux/action";
 
 const db = getFirestore(FirebaseApp);
 
