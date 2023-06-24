@@ -1,7 +1,7 @@
 
 const initialState = {
   userData: null,
-  hostingData: {},
+  roomData: {},
 };
 
 export const UserReducer = (state:any = initialState, action:any) => {

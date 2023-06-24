@@ -1,5 +1,6 @@
-import { getFirestore, doc, setDoc, getDoc, addDoc, collection, updateDoc, where, query } from "firebase/firestore";
+import { getFirestore, doc, setDoc, getDoc, addDoc, collection, updateDoc, where, query, onSnapshot } from "firebase/firestore";
 import { FirebaseApp } from "./init";
+import { SaveRoom } from "../redux/action";
 
 const db = getFirestore(FirebaseApp);
 
@@ -30,8 +31,9 @@ export const UpdateData = async (colRef:string, docRef:any, data:any) => {
   return true;
 }
 
-export const GetRoom = (title:string, passcode:string) => {
-  const citiesRef = collection(db, "cities");
-  const q = query(citiesRef, where("title", "==", title), where("passcode", "==", passcode));
-  console.log(q)
+export const GetRoom = async (title:string, passcode:string) => {
+  const roomsRef = collection(db, "hosting");
+  const q = query(roomsRef, where("title", "==", title), where("passcode", "==", passcode));
+  return q
+  
 }

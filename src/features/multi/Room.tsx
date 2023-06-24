@@ -51,10 +51,16 @@ const Room = () => {
       return (
         <div className='w-full h-screen flex flex-col justify-center px-3'>
           <h2 className='text-2xl font-semibold'>Room</h2>
-          <p className="pb-5 border-b-2">Welcome to {roomData.title}</p>
+          <p className="pb-5 border-b-2">Welcome to {room.title}</p>
           <p className="mt-5 pt-5">Connected players</p>
           <div className="grid grid-cols-3 gap-3 mt-3 h-[50%] overflow-y-scroll py-2">
-            <div className="bg-gray-100 h-28 rounded-md"></div>
+            {room.players.map((player:any) => {
+              return (
+                <div className="relative bg-gray-100 h-28 rounded-md overflow-hidden">
+                  <p className='absolute w-full text-center bottom-0 bg-gray-600 text-white opacity-90 font-meium py-1'>{player.name}</p>
+                </div>
+              )
+            })}
           </div>
           <button className="bg-orange-700 py-3 text-white font-medium rounded-md mt-5">Leave</button>
         </div>
