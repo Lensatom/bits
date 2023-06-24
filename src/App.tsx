@@ -6,8 +6,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useDispatch } from 'react-redux';
 import { GetUser } from './redux/action';
 import { GetData } from './firebase/firestore';
-import { Horj } from './features/multi';
-import Host from './features/multi/Host';
+import { Horj, Host, Join, Room, Rooms } from './features/multi';
 
 function App() {
 
@@ -33,7 +32,7 @@ function App() {
   }, [])
 
   return (
-    <>
+    <div className='bg-white'>
       <Routes>
         <Route path="" element={<Home />} />
         <Route path="login" element={<Login />} />
@@ -45,9 +44,12 @@ function App() {
         <Route path="multi">
           <Route path="horj" element={<Horj />} />
           <Route path="host" element={<Host />} />
+          <Route path="join" element={<Join />} />
+          <Route path="rooms" element={<Rooms />} />
+          <Route path="room" element={<Room />} />
         </Route>
       </Routes>
-    </>
+    </div>
   )
 }
 

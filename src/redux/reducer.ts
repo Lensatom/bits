@@ -1,10 +1,21 @@
 
-const initialState = null;
+const initialState = {
+  userData: null,
+  hostingData: {},
+};
 
 export const UserReducer = (state:any = initialState, action:any) => {
   switch (action.type) {
     case "GET_DATA":
-      return action.data;
+      return {
+        ...state,
+        userData: action.data
+      };
+    case "SAVE_ROOM":
+      return {
+        ...state,
+        roomData: action.data
+      };
     default:
       return state
   }

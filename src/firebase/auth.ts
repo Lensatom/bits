@@ -5,8 +5,8 @@ import { AddData } from "./firestore";
 const auth = getAuth(FirebaseApp)
 
 // Get current user
-export const GetCurrentUser = async () => {
-  const response = await onAuthStateChanged(auth, (user) => {
+export const GetCurrentUser = () => {
+  const response = onAuthStateChanged(auth, (user) => {
     if (user) {
       const uid = user.uid;
       return uid
@@ -22,7 +22,7 @@ export const SignUp = async (email:string, password:string, username: string) =>
   const response = await createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const user = userCredential.user;
-      return user.uid
+      return user
     })
     .catch((error) => {
       const errorCode = error.code;
@@ -31,7 +31,13 @@ export const SignUp = async (email:string, password:string, username: string) =>
       return(null)
     });
   if (response !== null) {
-    await AddData("users", response, {username})
+    const data = {
+      uid: response.uid,
+      username,
+      email,
+      avatar: "",
+    }
+    await AddData("users", response.uid, data)
     return true;
   }
 }

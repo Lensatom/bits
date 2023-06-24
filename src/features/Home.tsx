@@ -11,7 +11,7 @@ const Home = () => {
 
   const dispatch = useDispatch()
   const [status, setStatus] = useState("")
-  const state:any = useSelector((state) => state)
+  const state:any = useSelector((state:any) => state.userData)
 
   const letsGo = () => {
     setStatus("Ready!");

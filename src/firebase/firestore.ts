@@ -1,12 +1,17 @@
-import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
+import { getFirestore, doc, setDoc, getDoc, addDoc, collection, updateDoc, where, query } from "firebase/firestore";
 import { FirebaseApp } from "./init";
 
 const db = getFirestore(FirebaseApp);
 
 // Add new data
-export const AddData = async (colRef:string, docRef:string, data:any) => {
-  await setDoc(doc(db, colRef, docRef), data);
-  return true
+export const AddData = async (colRef:string, docRef:string | null, data:any) => {
+  let res;
+  if (docRef === null) {
+    res = await addDoc(collection(db, colRef), data)
+  } else {
+    res = await setDoc(doc(db, colRef, docRef), data);
+  }
+  return res?.id
 }
 
 export const GetData = async (colRef:string, docRef:string) => {
@@ -18,4 +23,15 @@ export const GetData = async (colRef:string, docRef:string) => {
   } else {
     return null
   }
+}
+
+export const UpdateData = async (colRef:string, docRef:any, data:any) => {
+  await updateDoc(doc(db, colRef, docRef), data);
+  return true;
+}
+
+export const GetRoom = (title:string, passcode:string) => {
+  const citiesRef = collection(db, "cities");
+  const q = query(citiesRef, where("title", "==", title), where("passcode", "==", passcode));
+  console.log(q)
 }
