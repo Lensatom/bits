@@ -1,7 +1,8 @@
 import  { useEffect, useState } from 'react'
 import { useSelector } from "react-redux"
-import { GetData } from '../../firebase/firestore';
+import { GetRoom } from '../../firebase/firestore';
 import { Loader } from '../../components';
+import { onSnapshot } from 'firebase/firestore';
 
 
 const Room = () => {
@@ -15,8 +16,14 @@ const Room = () => {
   }, [])
 
   const getData = async () => {
-    const room = await GetData("hosting", roomData.id);
-    setRoom(room);
+    const q = await GetRoom(roomData.id, null)
+    let rooms:any = []
+    onSnapshot(q, async (snapshot) => {
+      snapshot.docs.forEach((doc:any) => {
+        rooms.push({...doc.data()})
+      })
+      setRoom(rooms[0])
+    })
   }
 
   if (room === null) {

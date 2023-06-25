@@ -30,9 +30,15 @@ export const UpdateData = async (colRef:string, docRef:any, data:any) => {
   return true;
 }
 
-export const GetRoom = async (title:string, passcode:string) => {
-  const roomsRef = collection(db, "hosting");
-  const q = query(roomsRef, where("title", "==", title), where("passcode", "==", passcode));
-  return q
-  
+export const GetRoom = async (title:string, passcode:string | null) => {
+  if (passcode === null) {
+    const id = title;
+    const roomsRef = collection(db, "hosting");
+    const q = query(roomsRef, where("id", "==", id));
+    return q
+  } else {
+    const roomsRef = collection(db, "hosting");
+    const q = query(roomsRef, where("title", "==", title), where("passcode", "==", passcode));
+    return q
+  }
 }
