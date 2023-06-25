@@ -23,6 +23,7 @@ const Room = () => {
         rooms.push({...doc.data()})
       })
       setRoom(rooms[0])
+      console.log(rooms)
     })
   }
 

@@ -32,9 +32,9 @@ export const UpdateData = async (colRef:string, docRef:any, data:any) => {
 
 export const GetRoom = async (title:string, passcode:string | null) => {
   if (passcode === null) {
-    const id = title;
+    const hostId = title;
     const roomsRef = collection(db, "hosting");
-    const q = query(roomsRef, where("id", "==", id));
+    const q = query(roomsRef, where("hostId", "==", hostId));
     return q
   } else {
     const roomsRef = collection(db, "hosting");
