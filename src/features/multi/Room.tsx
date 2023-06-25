@@ -22,7 +22,7 @@ const Room = () => {
       snapshot.docs.forEach((doc:any) => {
         rooms.push({...doc.data()})
       })
-      setRoom(rooms[0])
+      setRoom(rooms[rooms.length - 1])
       console.log(rooms)
     })
   }
@@ -47,7 +47,7 @@ const Room = () => {
             {room.players.map((player:any) => {
               return (
                 <div className="relative bg-gray-100 h-28 rounded-md overflow-hidden">
-                  <p className='absolute w-full text-center bottom-0 bg-gray-600 text-white opacity-90 font-meium py-1'>{player.name}</p>
+                  <p className='absolute w-full text-center bottom-0 bg-gray-600 text-white opacity-90 text-xs font-medium py-2'>{player.name}</p>
                 </div>
               )
             })}
@@ -60,12 +60,12 @@ const Room = () => {
         <div className='w-full h-screen flex flex-col justify-center px-3'>
           <h2 className='text-2xl font-semibold'>Room</h2>
           <p className="pb-5 border-b-2">Welcome to {room.title}</p>
-          <p className="mt-5 pt-5">Connected players</p>
+          <p className="pt-5">Connected players</p>
           <div className="grid grid-cols-3 gap-3 mt-3 h-[50%] overflow-y-scroll py-2">
             {room.players.map((player:any) => {
               return (
                 <div className="relative bg-gray-100 h-28 rounded-md overflow-hidden">
-                  <p className='absolute w-full text-center bottom-0 bg-gray-600 text-white opacity-90 font-meium py-1'>{player.name}</p>
+                  <p className='absolute w-full text-center bottom-0 bg-gray-600 text-white opacity-90 text-xs font-medium py-2'>{player.name}</p>
                 </div>
               )
             })}
