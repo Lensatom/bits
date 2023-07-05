@@ -30,7 +30,7 @@ const Room = () => {
       const room = rooms[rooms.length - 1]
       // Check if room has started
       if (room.ready === true) {
-        navigate("/multi/lobby")
+        navigate("/multi/game")
       }
       // Check if user is an host and checks ready status if user is not
       const me = room.players.filter((player:any) => player.name === userData.username)[0]
