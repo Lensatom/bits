@@ -29,7 +29,8 @@ const Host = () => {
     const hostId = await AddData("hosting", null, {
       ...hostData,
       host: state.username,
-      createTime: new Date()
+      createTime: new Date(),
+      ready: false
     });
     await UpdateData("hosting", hostId, {hostId: hostId});
     const data = {

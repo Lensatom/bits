@@ -3,10 +3,12 @@ import { useSelector } from "react-redux"
 import { GetRoom, UpdateData } from '../../firebase/firestore';
 import { Loader } from '../../components';
 import { onSnapshot } from 'firebase/firestore';
+import { useNavigate } from 'react-router-dom';
 
 
 const Room = () => {
 
+  const navigate = useNavigate()
   const roomData:any = useSelector((state:any) => state.roomData);
   const userData:any = useSelector((state:any) => state.userData);
   const [room, setRoom] = useState<any>(null);
@@ -26,6 +28,10 @@ const Room = () => {
       })
       // Get room
       const room = rooms[rooms.length - 1]
+      // Check if room has started
+      if (room.ready === true) {
+        navigate("/multi/lobby")
+      }
       // Check if user is an host and checks ready status if user is not
       const me = room.players.filter((player:any) => player.name === userData.username)[0]
       if (me.name !== room.host) {
@@ -63,6 +69,13 @@ const Room = () => {
     UpdateData("hosting", room.hostId, {players: players})
   }
 
+  const start = () => {
+    if (ready === false) {
+      return false
+    }
+    UpdateData("hosting", room.hostId, {ready: true})
+  }
+
   if (room === null) {
     return (
       <div className='w-full h-screen'>
@@ -88,7 +101,7 @@ const Room = () => {
               )
             })}
           </div>
-          <button className="bg-orange-700 py-3 text-white font-medium rounded-md mt-5">{ready ? "Start" : "Waiting..."}</button>
+          <button onClick={start} className="bg-orange-700 py-3 text-white font-medium rounded-md mt-5">{ready ? "Start" : "Waiting..."}</button>
         </div>
       )
     } else {
