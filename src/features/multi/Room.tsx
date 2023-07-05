@@ -27,7 +27,7 @@ const Room = () => {
       // Get room
       const room = rooms[rooms.length - 1]
       // Check if user is an host and checks ready status if user is not
-      const me = room.players.filter((player:any) => player.name === userData.username)
+      const me = room.players.filter((player:any) => player.name === userData.username)[0]
       if (me.name !== room.host) {
         set3Ready(me.ready)
       }
