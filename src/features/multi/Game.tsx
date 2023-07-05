@@ -18,6 +18,7 @@ const Lobby = () => {
   const [userAnswer, setUserAnswer] = useState<any>("")
   const [score, setScore] = useState(0);
   const [count, setCount] = useState(3);
+  const [room, setRoom] = useState<any>();
   const time = 60000;
 
   useEffect(() => {
@@ -38,6 +39,7 @@ const Lobby = () => {
       })
       // Get room
       const room = rooms[rooms.length - 1]
+      setRoom(room)
       if (room.questions) {
         setQuestions(room.questions)
         setTimeout(() => {
@@ -76,7 +78,7 @@ const Lobby = () => {
   const endGame = async () => {
     setStatus("Climax!")
     let players:any = [];
-    roomData.players.map((player:any) => {
+    room.players.map((player:any) => {
       if (player.name === userData.username) {
         players.push({
           ...player,
@@ -89,7 +91,7 @@ const Lobby = () => {
         players.push(player)
       }
     })
-    await UpdateData("hosting", roomData, {players: players})
+    await UpdateData("hosting", room.hostId, {players: players})
     setStatus("End!")
   }
 
