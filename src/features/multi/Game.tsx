@@ -83,9 +83,9 @@ const Lobby = () => {
         players.push({
           ...player,
           score: score,
-          attempt: questionNumber + 1,
+          attempt: questionNumber,
           passed: score / 5,
-          failed: (questionNumber + 1) - (score / 5)
+          failed: (questionNumber) - (score / 5)
         })
       } else {
         players.push(player)
@@ -165,7 +165,8 @@ const Lobby = () => {
       </div>
     )
   } else if (status === "End!") {
-    const players = roomData.players;
+
+    const players = room.players;
   
     return (
       <div className='w-full h-screen flex flex-col justify-center items-center gap-4 px-3'>
