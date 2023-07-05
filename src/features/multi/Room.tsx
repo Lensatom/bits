@@ -1,6 +1,6 @@
 import  { useEffect, useState } from 'react'
 import { useSelector } from "react-redux"
-import { GetRoom } from '../../firebase/firestore';
+import { GetRoom, UpdateData } from '../../firebase/firestore';
 import { Loader } from '../../components';
 import { onSnapshot } from 'firebase/firestore';
 
@@ -9,7 +9,8 @@ const Room = () => {
 
   const roomData:any = useSelector((state:any) => state.roomData);
   const userData:any = useSelector((state:any) => state.userData);
-  const [room, setRoom] = useState<any>(null)
+  const [room, setRoom] = useState<any>(null);
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
     getData()
@@ -22,9 +23,35 @@ const Room = () => {
       snapshot.docs.forEach((doc:any) => {
         rooms.push({...doc.data()})
       })
-      setRoom(rooms[rooms.length - 1])
-      console.log(rooms)
+      const room = rooms[rooms.length - 1]
+      setRoom(room)
+      if (room.palyer.length === 1) {
+        setReady(false)
+      } else {
+        let ready = true;
+        room.players.map((player:any) => {
+          if (player.ready === false) {
+            ready = false;
+          }
+        })
+        setReady(ready)
+      }
     })
+  }
+
+  const iAmReady = () => {
+    let players:any = [];
+    room.players.map((player:any) => {
+      if (player.name === userData.username) {
+        players.push({
+          ...player,
+          ready: player.ready
+        })
+      } else {
+        players.push(player)
+      }
+    })
+    UpdateData("hosting", room.id, {players: players})
   }
 
   if (room === null) {
@@ -34,7 +61,7 @@ const Room = () => {
       </div>
     ) 
   } else {
-    if (roomData.host) {
+    if (room.host === userData.username) {
       return (
         <div className='w-full h-screen flex flex-col justify-center px-3'>
           <h2 className='text-2xl font-semibold'>Room</h2>
@@ -52,7 +79,7 @@ const Room = () => {
               )
             })}
           </div>
-          <button className="bg-orange-700 py-3 text-white font-medium rounded-md mt-5">Waiting...</button>
+          <button className="bg-orange-700 py-3 text-white font-medium rounded-md mt-5">{ready ? "Ready" : "Waiting..."}</button>
         </div>
       )
     } else {
@@ -70,7 +97,7 @@ const Room = () => {
               )
             })}
           </div>
-          <button className="bg-orange-700 py-3 text-white font-medium rounded-md mt-5">Ready</button>
+          <button onClick={iAmReady} className="bg-orange-700 py-3 text-white font-medium rounded-md mt-5">Ready</button>
         </div>
       )
     }

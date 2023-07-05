@@ -1,17 +1,19 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Routes, Route, useNavigate } from 'react-router-dom'
 import { Home, Login, Register, SelectGame } from './features'
 import { Game } from './features/training'
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useDispatch } from 'react-redux';
-import { GetUser } from './redux/action';
+import { GetUser, SaveRoom } from './redux/action';
 import { GetData } from './firebase/firestore';
 import { Horj, Host, Join, Room, Rooms } from './features/multi';
+import { Loader } from './components';
 
 function App() {
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const [loaded, setLoaded] = useState(false)
 
   useEffect(() => {
     const auth = getAuth();
@@ -23,6 +25,8 @@ function App() {
           navigate("/login")
         } else {
           dispatch(GetUser(data))
+          dispatch(SaveRoom(data.gameStatus))
+          setLoaded(true);
         }
       } else {
         navigate("/login")
@@ -30,6 +34,14 @@ function App() {
       }
     })
   }, [])
+
+  if (!loaded) {
+    return (
+      <div className='w-full h-screen'>
+        <Loader />
+      </div>
+    )
+  }
 
   return (
     <div className='bg-white'>

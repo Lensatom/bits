@@ -13,7 +13,6 @@ const Rooms = () => {
   const userData:any = useSelector((state:any) => state.userData)
   const dispatch = useDispatch()
   const navigate = useNavigate()
-
   const [rooms, setRooms] = useState<any>(null)
 
   useEffect(() => {
@@ -21,7 +20,6 @@ const Rooms = () => {
   }, [])
 
   const getRooms = async () => {
-    console.log(state)
     const q = await GetRoom(state.title, state.passcode)
     let rooms:any = []
     onSnapshot(q, async (snapshot) => {
@@ -35,27 +33,32 @@ const Rooms = () => {
   const joinRoom = async (id:string) => {
     const room = rooms.filter((room:any) => room.hostId === id)[0];
     const players = []
+
+    // Download current users
     room.players.map((player:any) => {
       if (player.name !== userData.username) {
         players.push(player)
       }
     })
+
+    // Upload/update this user
     players.push(
       {
         name: userData.username,
-        avatar: userData.avatar
+        avatar: userData.avatar,
+        ready: false
       }
     )
+
     await UpdateData("hosting", id, {...room, players: players})
     const data = {
       id: id,
-      host: false,
+      type: "multi",
     }
-    await UpdateData("users", userData.uid, {multiStatus: data})
+    await UpdateData("users", userData.uid, {gameStatus: data})
     dispatch(SaveRoom(data))
     navigate("/multi/room")
   }
-
 
   if (rooms === null) {
     return (

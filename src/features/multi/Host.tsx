@@ -18,7 +18,7 @@ const Host = () => {
     players: [
       {
         name: state.username,
-        avatar: state.avatar
+        avatar: state.avatar,
       }
     ]
   })
@@ -33,9 +33,9 @@ const Host = () => {
     await UpdateData("hosting", hostId, {hostId: hostId});
     const data = {
       id: hostId,
-      host: true,
+      type: "multi",
     }
-    await UpdateData("users", state.uid, {multiStatus: data})
+    await UpdateData("users", state.uid, {gameStatus: data})
     dispatch(SaveRoom(data))
     navigate("/multi/room")
   }
