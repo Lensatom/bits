@@ -34,7 +34,7 @@ const Join = () => {
         <input required value={roomData.title} onChange={(e:any) => setRoomData({...roomData, title: e.target.value})} placeholder="Give your game a title" className="rounded-md p-3 bg-gray-200" />
         <label className='mt-5'>Room Passcode</label>
         <input required value={roomData.passcode} onChange={(e:any) => setRoomData({...roomData, passcode: e.target.value})} placeholder="Secure your room" className="rounded-md p-3 bg-gray-200" />
-        <button onSubmit={submit} className='mt-5 bg-orange-700 text-white py-3 rounded-md'>Create Room</button>
+        <button onSubmit={submit} className='mt-5 bg-orange-700 text-white py-3 rounded-md'>Join Room</button>
       </form>
     </div>
   )

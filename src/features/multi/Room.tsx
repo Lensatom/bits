@@ -52,7 +52,7 @@ const Room = () => {
               )
             })}
           </div>
-          <button className="bg-orange-700 py-3 text-white font-medium rounded-md mt-5">Leave</button>
+          <button className="bg-orange-700 py-3 text-white font-medium rounded-md mt-5">Waiting...</button>
         </div>
       )
     } else {
@@ -70,7 +70,7 @@ const Room = () => {
               )
             })}
           </div>
-          <button className="bg-orange-700 py-3 text-white font-medium rounded-md mt-5">Leave</button>
+          <button className="bg-orange-700 py-3 text-white font-medium rounded-md mt-5">Ready</button>
         </div>
       )
     }
