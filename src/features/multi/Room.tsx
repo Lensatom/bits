@@ -11,6 +11,7 @@ const Room = () => {
   const userData:any = useSelector((state:any) => state.userData);
   const [room, setRoom] = useState<any>(null);
   const [ready, setReady] = useState(false);
+  const [ready3, set3Ready] = useState(false);
 
   useEffect(() => {
     getData()
@@ -23,8 +24,16 @@ const Room = () => {
       snapshot.docs.forEach((doc:any) => {
         rooms.push({...doc.data()})
       })
+      // Get room
       const room = rooms[rooms.length - 1]
+      // Check if user is an host and checks ready status if user is not
+      const me = room.players.filter((player:any) => player.name === userData.username)
+      if (me.name !== room.host) {
+        set3Ready(me.ready)
+      }
+      // Update room state
       setRoom(room)
+      // Checks if all users are ready
       if (room.players.length === 1) {
         setReady(false)
       } else {
@@ -79,7 +88,7 @@ const Room = () => {
               )
             })}
           </div>
-          <button className="bg-orange-700 py-3 text-white font-medium rounded-md mt-5">{ready ? "Ready" : "Waiting..."}</button>
+          <button className="bg-orange-700 py-3 text-white font-medium rounded-md mt-5">{ready ? "Start" : "Waiting..."}</button>
         </div>
       )
     } else {
@@ -97,7 +106,7 @@ const Room = () => {
               )
             })}
           </div>
-          <button onClick={iAmReady} className="bg-orange-700 py-3 text-white font-medium rounded-md mt-5">Ready</button>
+          <button onClick={iAmReady} className="bg-orange-700 py-3 text-white font-medium rounded-md mt-5">{ready3 ? "Waiting..." : "Ready"}</button>
         </div>
       )
     }
