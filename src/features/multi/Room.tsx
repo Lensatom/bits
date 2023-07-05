@@ -51,7 +51,7 @@ const Room = () => {
         players.push(player)
       }
     })
-    UpdateData("hosting", room.id, {players: players})
+    UpdateData("hosting", room.hostId, {players: players})
   }
 
   if (room === null) {
