@@ -11,7 +11,7 @@ import { BsCheck } from 'react-icons/bs';
 const Lobby = () => {
 
   const roomData:any = useSelector((state:any) => state.roomData);
-  // const userData:any = useSelector((state:any) => state.userData);
+  const userData:any = useSelector((state:any) => state.userData);
   const [status, setStatus] = useState("Loading...")
   const [questions, setQuestions] = useState<any>([])
   const [questionNumber, setQuestionNumber] = useState<number>(0)
@@ -73,7 +73,23 @@ const Lobby = () => {
     }, 51000)
   }
 
-  const endGame = () => {
+  const endGame = async () => {
+    setStatus("Climax!")
+    let players:any = [];
+    roomData.players.map((player:any) => {
+      if (player.name === userData.username) {
+        players.push({
+          ...player,
+          score: score,
+          attempt: questionNumber + 1,
+          passed: score / 5,
+          failed: (questionNumber + 1) - (score / 5)
+        })
+      } else {
+        players.push(player)
+      }
+    })
+    await UpdateData("hosting", roomData, {players: players})
     setStatus("End!")
   }
 
@@ -147,19 +163,45 @@ const Lobby = () => {
       </div>
     )
   } else if (status === "End!") {
+    const players = roomData.players;
+  
     return (
-      <div className='w-full h-screen flex flex-col justify-center items-center gap-4'>
+      <div className='w-full h-screen flex flex-col justify-center items-center gap-4 px-3'>
         <h2 className='text-3xl font-semibold'>Nice game!</h2>
-        <p className='text-orange-700'>You scored a whooping</p>
-        <div className='flex items-end gap-1'>
-          <h2 className='text-2xl font-bold text-gray-700'>{score}</h2>
-          <p className='text-md font-bold text-gray-700'>Points</p>
-        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>User</th>
+              <th>A</th>
+              <th>F</th>
+              <th>P</th>
+              <th>Score</th>
+            </tr>
+          </thead>
+          <tbody>
+            {players.map((player:any) => {
+              return (
+                <tr>
+                  <td>{player.name}</td>
+                  <td>{player.attempts}</td>
+                  <td>{player.failed}</td>
+                  <td>{player.passed}</td>
+                  <td>{player.score}</td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
         <NavLink to="/selectGame" className="px-10 py-3 bg-orange-700 text-white rounded-md font-medium">Back</NavLink>
       </div>
     )
   } else {
-    return <Loader message="Setting up game environment" />
+    return (
+      <div className='w-full h-screen'>
+        <Loader />
+      </div>
+    )
+      
   }
 }
 
