@@ -25,7 +25,7 @@ const Room = () => {
       })
       const room = rooms[rooms.length - 1]
       setRoom(room)
-      if (room.palyer.length === 1) {
+      if (room.players.length === 1) {
         setReady(false)
       } else {
         let ready = true;
@@ -45,7 +45,7 @@ const Room = () => {
       if (player.name === userData.username) {
         players.push({
           ...player,
-          ready: player.ready
+          ready: true
         })
       } else {
         players.push(player)

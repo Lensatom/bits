@@ -19,6 +19,7 @@ const Host = () => {
       {
         name: state.username,
         avatar: state.avatar,
+        ready: true,
       }
     ]
   })
