@@ -8,24 +8,46 @@ import { NavLink } from 'react-router-dom';
 import { BiTime } from 'react-icons/bi';
 import { BsCheck } from 'react-icons/bs';
 
-const Lobby = () => {
+const Game = () => {
 
   const roomData:any = useSelector((state:any) => state.roomData);
   const userData:any = useSelector((state:any) => state.userData);
-  const [status, setStatus] = useState("Loading...")
+  const [status, setStatus] = useState("Waiting...")
   const [questions, setQuestions] = useState<any>([])
   const [questionNumber, setQuestionNumber] = useState<number>(0)
   const [userAnswer, setUserAnswer] = useState<any>("")
   const [score, setScore] = useState(0);
   const [count, setCount] = useState(3);
-  const [room, setRoom] = useState<any>();
+  const [room, setRoom] = useState<any>(null);
   const time = 60000;
-
+  
   useEffect(() => {
-    getData()
-  }, [])
+    if (status === "Waiting...") {
+      setStatus("Loading!")
+      getData()
+    }
+    if (status === "Climax!" && room) {
+      let players:any = [];
+      room.players.map((player:any) => {
+        if (player.name === userData.username) {
+          players.push({
+            ...player,
+            score: score,
+            attempts: questionNumber,
+            passed: score / 5,
+            failed: (questionNumber) - (score / 5)
+          })
+        } else {
+          players.push(player)
+        }
+      })
+      UpdateData("hosting", room.hostId, {players: players})
+      setStatus("End!")
+    }
+  }, [status, room])
   
   const getData = async () => {
+    let updateCount = 0
     let localQuestions:any = []
     for (let i = 0; i < 500; i++) {
       localQuestions = [...localQuestions, GenerateQuestions()]
@@ -38,16 +60,20 @@ const Lobby = () => {
         rooms.push({...doc.data()})
       })
       // Get room
+      console.log(rooms)
       const room = rooms[rooms.length - 1]
       setRoom(room)
-      if (room.questions) {
-        setQuestions(room.questions)
-        setTimeout(() => {
-          setStatus("Ready!")
+      updateCount++
+      if (updateCount === 1) {
+        if (room.questions) {
+          setQuestions(room.questions)
           setTimeout(() => {
-            startTime()
-          }, 5000)
-        }, 3000)
+            setStatus("Ready!")
+            setTimeout(() => {
+              startTime()
+            }, 5000)
+          }, 3000)
+        }
       }
     })
   }
@@ -77,22 +103,6 @@ const Lobby = () => {
 
   const endGame = async () => {
     setStatus("Climax!")
-    let players:any = [];
-    room.players.map((player:any) => {
-      if (player.name === userData.username) {
-        players.push({
-          ...player,
-          score: score,
-          attempt: questionNumber,
-          passed: score / 5,
-          failed: (questionNumber) - (score / 5)
-        })
-      } else {
-        players.push(player)
-      }
-    })
-    await UpdateData("hosting", room.hostId, {players: players})
-    setStatus("End!")
   }
 
   const changeUserAnswer = (answer:string) => {
@@ -184,7 +194,7 @@ const Lobby = () => {
           <tbody>
             {players.map((player:any) => {
               return (
-                <tr>
+                <tr key={player.name}>
                   <td>{player.name}</td>
                   <td>{player.attempts}</td>
                   <td>{player.failed}</td>
@@ -208,4 +218,4 @@ const Lobby = () => {
   }
 }
 
-export default Lobby
+export default Game
