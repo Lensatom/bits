@@ -42,3 +42,9 @@ export const GetRoom = async (title:string, passcode:string | null) => {
     return q
   }
 }
+
+export const CheckIfUsernameIsInUse = async (username:string) => {
+  const roomsRef = collection(db, "users");
+  const q = query(roomsRef, where("username", "==", username));
+  return q
+}

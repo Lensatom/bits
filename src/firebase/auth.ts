@@ -26,11 +26,9 @@ export const SignUp = async (email:string, password:string, username: string) =>
     })
     .catch((error) => {
       const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log(`${errorCode} ${errorMessage}`)
-      return(null)
+      return errorCode
     });
-  if (response !== null) {
+  if (typeof(response) !== "string") {
     const data = {
       uid: response.uid,
       username,
@@ -39,6 +37,8 @@ export const SignUp = async (email:string, password:string, username: string) =>
     }
     await AddData("users", response.uid, data)
     return true;
+  } else {
+    return response;
   }
 }
 
@@ -46,14 +46,11 @@ export const SignUp = async (email:string, password:string, username: string) =>
 export const SignIn = async (email:string, password:string) => {
   const response = await signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-      // Signed in 
       const user = userCredential.user;
       return user;
     })
     .catch((error) => {
       const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log(errorMessage)
       return errorCode;
     });
   return response;
