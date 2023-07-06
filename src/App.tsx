@@ -23,6 +23,7 @@ function App() {
         let data = await GetData("users", uid);
         if (data === null) {
           navigate("/login")
+          setLoaded(true)
         } else {
           dispatch(GetUser(data))
           dispatch(SaveRoom(data.gameStatus))
@@ -30,7 +31,7 @@ function App() {
         }
       } else {
         navigate("/login")
-        console.log("Hi")
+        setLoaded(true)
       }
     })
   }, [])
