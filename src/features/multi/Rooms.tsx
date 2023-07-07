@@ -3,9 +3,10 @@ import { GetRoom, UpdateData } from "../../firebase/firestore"
 import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import { SaveRoom } from "../../redux/action"
-import { useNavigate } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 import { Loader } from "../../components"
 import { onSnapshot } from "firebase/firestore"
+import Button from "../../components/Button"
 
 const Rooms = () => {
 
@@ -14,6 +15,7 @@ const Rooms = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [rooms, setRooms] = useState<any>(null)
+  const [buttonStatus, setButtonStatus] = useState("active")
 
   useEffect(() => {
     getRooms()
@@ -31,6 +33,7 @@ const Rooms = () => {
   }
 
   const joinRoom = async (id:string) => {
+    setButtonStatus("loading")
     const room = rooms.filter((room:any) => room.hostId === id)[0];
     const players = []
 
@@ -70,15 +73,24 @@ const Rooms = () => {
     return (
       <div className="w-full h-screen flex flex-col justify-center px-3">
         <h2 className="text-2x font-semibold pb-5 border-b-2">Room</h2>
-        <div className="h-1/2 pt-5">
-          {rooms?.map((room:any) => {
-            return (
-              <div onClick={() => joinRoom(room.hostId)} className="p-3 bg-gray-100 rounded-md">
-                <h2 className="font-medium">{room.title}</h2>
-                <p className="text-xs font-medium text-orange-700">By {room.host}</p>
-              </div>
-            )
-          })}
+        <div className="h-1/2 pt-5 gap-2 w-full">
+          {rooms.length > 0 ?
+            rooms?.map((room:any) => {
+              return (
+                <div className="flex flex-col gap-2">
+                  <h2 className="font-medium text-xl">{room.title}'s Game</h2>
+                  <Button type="click" func={() => joinRoom(room.hostId)} status={buttonStatus} content="Join Game Now" />
+                </div>
+              )
+            }) :
+            <>
+              <h2 className="font-medium text-xl text-orange-600">Sorry,</h2>
+              <p className="mb-3">Info provided does not match with any room</p>
+              <Button status="active">
+                <NavLink to="/multi/join">Go back</NavLink>
+              </Button>
+            </>
+          }
         </div>
       </div>
     )

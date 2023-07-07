@@ -4,7 +4,7 @@ import { FirebaseApp } from "./init";
 const db = getFirestore(FirebaseApp);
 
 // Add new data
-export const AddData = async (colRef:string, docRef:string | null, data:any) => {
+export const  AddData = async (colRef:string, docRef:string | null, data:any) => {
   let res;
   if (docRef === null) {
     res = await addDoc(collection(db, colRef), data)
