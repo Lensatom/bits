@@ -47,7 +47,6 @@ const Game = () => {
   }, [status, room])
   
   const getData = async () => {
-    let updateCount = 0
     let localQuestions:any = []
     for (let i = 0; i < 500; i++) {
       localQuestions = [...localQuestions, GenerateQuestions()]
@@ -55,15 +54,15 @@ const Game = () => {
     await UpdateData("hosting", roomData.id, {questions: localQuestions})
     const q = await GetRoom(roomData.id, null)
     let rooms:any = []
+    let updateCount = 0
     onSnapshot(q, async (snapshot) => {
+      updateCount++
       snapshot.docs.forEach((doc:any) => {
         rooms.push({...doc.data()})
       })
       // Get room
-      console.log(rooms)
       const room = rooms[rooms.length - 1]
       setRoom(room)
-      updateCount++
       if (updateCount === 1) {
         if (room.questions) {
           setQuestions(room.questions)
