@@ -1,3 +1,6 @@
 export { default as NumberPad } from './NumberPad'
 export { default as Loader } from './Loader'
 export { default as InputField } from './InputField'
+export { default as CountDown } from './CountDown'
+export { default as StartGame } from './StartGame'
+export { default as EndGame } from './EndGame'

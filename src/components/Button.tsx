@@ -1,12 +1,21 @@
 import { useEffect, useState } from "react";
 
-const Button = (props:any) => {
+type Props = {
+  content?: string
+  func?: () => any
+  status: "active" | "loading"
+  type: "click" | "submit"
+  children?: React.ReactNode
+  className?: string
+}
 
-  const { content, func, status, type, children } = props;
+const Button = (props:Props) => {
+
+  const { content, func, status, type, children, className:customClassName } = props;
   const [className, setClassName] = useState("");
 
-  const loadingClassName="w-full bg-orange-700 text-white font-medium py-3 rounded-md opacity-70";
-  const activeClassName="w-full bg-orange-700 text-white font-medium py-3 rounded-md";
+  const loadingClassName=`${ customClassName } w-full bg-orange-700 text-white font-medium py-3 rounded-md opacity-70`;
+  const activeClassName=`${ customClassName } w-full bg-orange-700 text-white font-medium py-3 rounded-md`;
 
   useEffect(() => {
     if (status === "active") {
@@ -18,7 +27,7 @@ const Button = (props:any) => {
 
 
   return (
-    <button disabled={status !== "active" && true} onClick={type === "click" ? func : null} onSubmit={type === "submit" ? func : null} className={className}>
+    <button disabled={status !== "active" && true} onClick={type === "click" ? func : undefined} onSubmit={type === "submit" ? func : undefined} className={className}>
       {children ? children : status === "loading" ? "Loading..." : content}
     </button>
   )
