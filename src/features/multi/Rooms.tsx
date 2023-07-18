@@ -15,7 +15,7 @@ const Rooms = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [rooms, setRooms] = useState<any>(null)
-  const [buttonStatus, setButtonStatus] = useState("active")
+  const [buttonStatus, setButtonStatus] = useState<"active" | "inActive" | "loading">("active")
 
   useEffect(() => {
     getRooms()
@@ -86,7 +86,7 @@ const Rooms = () => {
             <>
               <h2 className="font-medium text-xl text-orange-600">Sorry,</h2>
               <p className="mb-3">Info provided does not match with any room</p>
-              <Button status="active">
+              <Button type="click" status="active">
                 <NavLink to="/multi/join">Go back</NavLink>
               </Button>
             </>

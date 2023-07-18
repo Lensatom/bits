@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 
 type Props = {
   content?: string
-  func?: () => any
-  status: "active" | "loading"
+  func?: any
+  status: "active" | "loading" | "inActive"
   type: "click" | "submit"
   children?: React.ReactNode
   className?: string

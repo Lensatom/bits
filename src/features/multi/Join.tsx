@@ -13,7 +13,7 @@ const Join = () => {
 
   const [title, setTitle] = useState("")
   const [passcode, setPasscode] = useState("")
-  const [buttonStatus, setButtonStatus] = useState("active")
+  const [buttonStatus, setButtonStatus] = useState<"active" | "inActive" | "loading">("active")
 
   const submit = async (e:any) => {
     e.preventDefault();

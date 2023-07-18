@@ -13,7 +13,7 @@ const Host = () => {
   const dispatch = useDispatch();
   const state:any = useSelector((state:any) => state.userData)
   const [error, setError] = useState("")
-  const [buttonStatus, setButtonStatus] = useState("active")
+  const [buttonStatus, setButtonStatus] = useState<"active" | "inActive" | "loading">("active")
 
   const [hostData, setHostData] = useState({
     title: state.username,
@@ -29,7 +29,6 @@ const Host = () => {
 
   const submit = async (e:any) => {
     e.preventDefault();
-    console.log("Hello")
     setError("")
     setButtonStatus("loading")
     if (hostData.passcode.length < 4) {

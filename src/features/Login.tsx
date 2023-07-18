@@ -11,7 +11,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
-  const [buttonStatus, setButtonStatus] = useState("active");
+  const [buttonStatus, setButtonStatus] = useState<"active" | "inActive" | "loading">("active");
   const navigate = useNavigate()
   const state:any = useSelector((state:any) => state.userData)
   

@@ -17,7 +17,7 @@ const Register = () => {
   const [emailError, setEmailError] = useState("");
   const [usernameError, setUsernameError] = useState("");
   const [passwordError, setPasswordError] = useState("");
-  const [buttonStatus, setButtonStatus] = useState("active");
+  const [buttonStatus, setButtonStatus] = useState<"active" | "inActive" | "loading">("active");
   const state:any = useSelector((state:any) => state.userData)
   
   useEffect(() => {
