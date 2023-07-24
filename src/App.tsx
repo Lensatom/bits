@@ -6,7 +6,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useDispatch } from 'react-redux';
 import { GetUser, SaveRoom } from './redux/action';
 import { GetData } from './firebase/firestore';
-import { Horj, Host, Join, Game as MultiGame, Room, Rooms } from './features/multi';
+import { Horj, Host, Join, Game as MultiGame, Room } from './features/multi';
 import { Loader } from './components';
 
 function App() {
@@ -58,7 +58,6 @@ function App() {
           <Route path="horj" element={<Horj />} />
           <Route path="host" element={<Host />} />
           <Route path="join" element={<Join />} />
-          <Route path="rooms" element={<Rooms />} />
           <Route path="room" element={<Room />} />
           <Route path="game" element={<MultiGame />} />
         </Route>

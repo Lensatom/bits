@@ -32,15 +32,21 @@ export const UpdateData = async (colRef:string, docRef:any, data:any) => {
 
 export const GetRoom = async (title:string, passcode:string | null) => {
   if (passcode === null) {
-    const hostId = title;
+    const id = title;
     const roomsRef = collection(db, "hosting");
-    const q = query(roomsRef, where("hostId", "==", hostId));
+    const q = query(roomsRef, where("id", "==", id));
     return q
   } else {
     const roomsRef = collection(db, "hosting");
     const q = query(roomsRef, where("title", "==", title), where("passcode", "==", passcode));
     return q
   }
+}
+
+export const GetPlayers = async (id:string) => {
+  const roomsRef = collection(db, `hosting/${id}/players`);
+  const q = query(roomsRef);
+  return q
 }
 
 export const CheckIfUsernameIsInUse = async (username:string) => {

@@ -1,6 +1,5 @@
 export { default as Horj } from './Horj'
 export { default as Host } from './Host'
 export { default as Join } from './Join'
-export { default as Rooms } from './Rooms'
 export { default as Room } from './Room'
 export { default as Game } from './Game'
