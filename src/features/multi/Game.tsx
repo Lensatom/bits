@@ -14,14 +14,16 @@ const Game = () => {
 
   useEffect(() => {
     if (status === "loading") {
-      const questions = GetQuestions((time / 1000) * 3);
-      postQuestions(questions)
+      if (room.host == userData.username) {
+        const questions = GetQuestions((time / 1000) * 3);
+        postQuestions(questions)
+      }
+      getUpdates()
     }
   }, [status])
 
   const postQuestions = async (questions:any) => {
     await UpdateData("hosting", roomData.id, {questions: questions})
-    getUpdates()
   }
 
   const getUpdates = async () => {

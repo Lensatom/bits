@@ -11,11 +11,11 @@ type Props = {
 }
 
 const StartGame = (props:Props) => {
+  const { questions, endGame } = props;
   const [userAnswer, setUserAnswer] = useState<string>("")
   const [questionNumber, setQuestionNumber] = useState<number>(0)
   const [score, setScore] = useState<number>(0)
   const [time, setTime] = useState(props.time / 1000);
-  const { questions, endGame } = props;
   const timerId = useRef();
 
   useEffect(() => {
