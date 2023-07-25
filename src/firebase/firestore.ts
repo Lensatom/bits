@@ -1,4 +1,4 @@
-import { getFirestore, doc, setDoc, getDoc, addDoc, collection, updateDoc, where, query } from "firebase/firestore";
+import { getFirestore, doc, setDoc, getDoc, addDoc, collection, updateDoc, where, query, deleteDoc } from "firebase/firestore";
 import { FirebaseApp } from "./init";
 
 const db = getFirestore(FirebaseApp);
@@ -28,6 +28,16 @@ export const GetData = async (colRef:string, docRef:string) => {
 export const UpdateData = async (colRef:string, docRef:any, data:any) => {
   await updateDoc(doc(db, colRef, docRef), data);
   return true;
+}
+
+export const DeleteData = async (colRef:string, docRef:string) => {
+  try {
+    await deleteDoc(doc(db, colRef, docRef));
+    return true;
+  } catch (error) {
+    console.log(error)
+    return true
+  }
 }
 
 export const GetRoom = async (title:string, passcode:string | null) => {

@@ -32,7 +32,7 @@ const RoomHostUI = (props:Props) => {
             )
           })}
         </div>
-        <Button type="click" func={start} status={ready ? "active" : "inActive"} content={ready ? "Start" : "Waiting..."} />
+        <Button type="click" func={() => start()} status={ready ? "active" : "inActive"} content={ready ? "Start" : "Waiting..."} />
       </div>
     )
   } else {

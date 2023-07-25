@@ -16,25 +16,24 @@ const Game = () => {
     if (status === "loading") {
       const questions = GetQuestions((time / 1000) * 3);
       postQuestions(questions)
-      getUpdates()
-      setStatus('ready');
     }
   }, [status])
 
   const postQuestions = async (questions:any) => {
     await UpdateData("hosting", roomData.id, {questions: questions})
+    getUpdates()
   }
 
   const getUpdates = async () => {
     const room = await GetRoom(roomData.id, null)
     onSnapshot(room, async (snapshot) => {
-      let rooms:any = []
-      snapshot.docs.forEach((doc:any) => {
-        rooms.push({...doc.data()})
+      let room:any
+      snapshot.forEach((doc:any) => {
+        room = doc.data()
       })
-      const data = rooms[rooms.length - 1]
-      setRoom(data);
+      setRoom(room);
     })
+    setStatus('ready');
   }
 
   const startGame = () => {

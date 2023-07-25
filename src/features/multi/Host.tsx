@@ -1,12 +1,13 @@
 import { useState } from 'react'
 import { FaArrowLeft } from "react-icons/fa"
 import { NavLink, useNavigate } from "react-router-dom"
-import { AddData } from '../../firebase/firestore'
+import { AddData, DeleteData, GetPlayers } from '../../firebase/firestore'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { SaveRoom } from '../../redux/action'
 import Button from '../../components/Button'
 import { InputField } from '../../components'
+import { onSnapshot } from 'firebase/firestore'
 
 const Host = () => {
   const navigate = useNavigate();
@@ -26,6 +27,18 @@ const Host = () => {
     } else if (passcode.length > 8) {
       return throwError("Passcode must not be more than 8 characters")
     } else {
+      // Delete all existing players
+      const players = await GetPlayers(host.username);
+      let updateCount = 0;
+      onSnapshot(players, (snapshot) => {
+        updateCount++
+        if (updateCount === 1) {
+          snapshot.forEach(async (doc:any) => {
+            await DeleteData(`hosting/${host.username}/players`, doc.data().username)
+          })
+        }
+      })
+      // Add game data
       await AddData("hosting", host.username, {
         passcode: passcode,
         host: host.username,
@@ -33,6 +46,7 @@ const Host = () => {
         ready: false,
         id: host.username
       });
+      // Add first player (host)
       await AddData(`hosting/${host.username}/players`, host.username, {
         avatar: host.avatar,
         username: host.username,
@@ -62,7 +76,7 @@ const Host = () => {
         <input required disabled value={host.username} className="rounded-md p-3 bg-gray-200" />
         <span className='mt-1 mb-5 px-3 text-xs text-gray-400 font-medium'>You cannot edit your room title</span>
         <InputField value={passcode} func={setPasscode} type="text" label="Passcode" error={error} />
-        <Button type="submit" content="Create Room" func={submit} status={buttonStatus} className='mt-2' />
+        <Button type="submit" content="Create Room" func={submit} status={buttonStatus} className='mt-5' />
       </form>
     </div>
   )
