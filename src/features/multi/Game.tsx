@@ -20,7 +20,10 @@ const Game = () => {
       }
       getUpdates()
     }
-  }, [status])
+    if (room.questions) {
+      setStatus('ready');
+    }
+  }, [status, room])
 
   const postQuestions = async (questions:any) => {
     await UpdateData("hosting", roomData.id, {questions: questions})
@@ -35,7 +38,6 @@ const Game = () => {
       })
       setRoom(room);
     })
-    setStatus('ready');
   }
 
   const startGame = () => {
