@@ -58,8 +58,9 @@ const Room = () => {
     })
   }
 
-  const start = () => {
-    UpdateData("hosting", room.hostId, {ready: true})
+  const start = async () => {
+    await UpdateData("hosting", room.hostId, {ready: true})
+    navigate('/multi/game')
   }
 
   if (room && room.host === userData.username) {
