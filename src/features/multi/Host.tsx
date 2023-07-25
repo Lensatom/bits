@@ -62,7 +62,7 @@ const Host = () => {
         <input required disabled value={host.username} className="rounded-md p-3 bg-gray-200" />
         <span className='mt-1 mb-5 px-3 text-xs text-gray-400 font-medium'>You cannot edit your room title</span>
         <InputField value={passcode} func={setPasscode} type="text" label="Passcode" error={error} />
-        <Button type="submit" content="Create Room" func={submit} status={buttonStatus} />
+        <Button type="submit" content="Create Room" func={submit} status={buttonStatus} className='mt-2' />
       </form>
     </div>
   )

@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { SaveRoom } from "../../redux/action";
 import { InputField } from "../../components";
 import Button from "../../components/Button";
-import { GetRoom, UpdateData } from "../../firebase/firestore";
+import { AddData, GetRoom } from "../../firebase/firestore";
 import { onSnapshot } from "firebase/firestore";
 import { useSelector } from "react-redux";
 
@@ -45,7 +45,7 @@ const Join = () => {
   }
 
   const joinRoom = async (room:any) => {
-    await UpdateData(`hosting/${room.id}/players`, userData.username, {
+    await AddData(`hosting/${room.id}/players`, userData.username, {
       avatar: userData.avatar,
       username: userData.username,
       ready:" false"
