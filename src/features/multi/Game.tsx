@@ -43,19 +43,10 @@ const Game = () => {
 
   const endGame = async (score:number, questionCount:number) => {
     setStatus("updating")
-    let players:any = [];
-    room.players.map((player:any) => {
-      if (player.name === userData.username) {
-        players.push({
-          ...player,
-          score: score,
-          attempts: questionCount
-        })
-      } else {
-        players.push(player)
-      }
+    await UpdateData(`hosting/${room.id}/players`, userData.username, {
+      score,
+      questionCount
     })
-    await UpdateData("hosting", room.hostId, {players})
     setStatus("end")
   }
 
@@ -68,7 +59,7 @@ const Game = () => {
   } else if (status === 'start') {
     return <StartGame questions={room.questions} time={time} endGame={endGame} />
   } else if (status === 'end') {
-    return <EndGame variant="multi" stats={room.players} restartGame={restartGame} />
+    return <EndGame variant="multi" restartGame={restartGame} id={room.id} />
   } else {
     return (
       <div className='w-full h-screen flex justify-center items-center'>

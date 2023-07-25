@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Button from "../../../components/Button";
 import Player from "./Player";
-import { GetData, GetPlayers } from "../../../firebase/firestore";
-import { onSnapshot } from "firebase/firestore";
 import { Loader } from "../../../components";
 
 type Props = {

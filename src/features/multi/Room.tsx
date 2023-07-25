@@ -1,6 +1,6 @@
 import  { useEffect, useState } from 'react'
 import { useSelector } from "react-redux"
-import { GetData, GetPlayers, GetRoom, UpdateData } from '../../firebase/firestore';
+import { GetPlayers, GetRoom, UpdateData } from '../../firebase/firestore';
 import { Loader } from '../../components';
 import { onSnapshot } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';

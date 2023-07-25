@@ -3,18 +3,39 @@ import { FaArrowLeft } from 'react-icons/fa'
 import { MdRestartAlt } from 'react-icons/md'
 import Button from './Button'
 import { NavLink } from 'react-router-dom'
+import { onSnapshot } from 'firebase/firestore'
+import { useEffect, useState } from 'react'
+import { GetPlayers } from '../firebase/firestore'
 
 type Props = {
   variant: "train" | "multi" | "world"
   score?: number
   questionCount?: number
-  stats?: any
   restartGame?: () => void
+  id?: string
 }
 
 const EndGame = (props:Props) => {
+  const { variant, restartGame, id } = props;
+  const [players, setPlayers] = useState([])
 
-  const { variant, restartGame, stats } = props;
+  useEffect(() => {
+    if (variant === "multi" && id) {
+      getPlayers()
+    }
+  }, [])
+
+  const getPlayers = async () => {
+    // @ts-ignore : Because id will alwyas be defined
+    const players = await GetPlayers(id);
+    onSnapshot(players, async (snapshot) => {
+      const players:any = []
+      snapshot.forEach((doc:any) => {
+        players.push(doc.data())
+      })
+      setPlayers(players)
+    })
+  }
 
   if (variant == "train") {
     return (
@@ -54,14 +75,14 @@ const EndGame = (props:Props) => {
           <h2 className='text-3xl font-semibold text-white mt-2'>Nice Game</h2>
           <p className='font-semibold text-gray-200'>Score board</p>
           <div className='w-full flex flex-col gap-3 mt-5'>
-            {stats.map((stat:any) => {
+            {players.map((player:any) => {
               return (
-                <div key={stat.name} className='w-full p-3 flex overflow-hidden justify-between items-center bg-orange-200 rounded-md'>
+                <div key={player.name} className='w-full p-3 flex overflow-hidden justify-between items-center bg-orange-200 rounded-md'>
                   <div className='flex items-center gap-3'>
                     <div className='w-16 h-16 bg-white rounded-md'></div>
-                    <p className='text-lg font-semibold text-gray-900'>{stat.name}</p>
+                    <p className='text-lg font-semibold text-gray-900'>{player.name}</p>
                   </div>
-                  <p className='pr-5 text-lg text-orange-600 font-bold'>{stat.score}</p>
+                  <p className='pr-5 text-lg text-orange-600 font-bold'>{player.score}</p>
                 </div>
               )
             })}
