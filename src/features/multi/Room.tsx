@@ -48,7 +48,7 @@ const Room = () => {
         setReady(false)
       } else {
         let ready = true;
-        room.players.map((player:any) => {
+        players.map((player:any) => {
           if (player.ready === false) {
             ready = false;
           }
