@@ -48,7 +48,7 @@ const Join = () => {
     await AddData(`hosting/${room.id}/players`, userData.username, {
       avatar: userData.avatar,
       username: userData.username,
-      ready:" false"
+      ready: false
     })
     dispatch(SaveRoom({
       id: room.id,
