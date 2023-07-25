@@ -20,7 +20,7 @@ const Game = () => {
       }
       getUpdates()
     }
-    if (room.questions) {
+    if (status === "loading" && room.questions) {
       setStatus('ready');
     }
   }, [status, room])
