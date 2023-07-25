@@ -33,6 +33,7 @@ const EndGame = (props:Props) => {
       snapshot.forEach((doc:any) => {
         players.push(doc.data())
       })
+      players.sort((x:any, y:any) => (x.score < y.score) ? 1 : (x.score > y.score) ? -1 : 0)
       setPlayers(players)
     })
   }
