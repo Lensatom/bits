@@ -14,12 +14,16 @@ const SelectGame = () => {
   return (
     <div className='w-full h-screen flex flex-col justify-center gap-10 px-3 py-8'>
       <NavLink to="/" className='absolute top-3 left-3 text-xl text-gray-700'><FaArrowLeft /></NavLink>
-      <h2 className='text-2xl font-bold text-gray-700 text-center'>Select Game</h2>
+      <div>
+        <h2 className='text-2xl font-bold text-gray-700 text-center'>Select Game</h2>
+        <p className="text-center text-sm font-medium text-gray-600 mt-1 px-12">Let's see how many questions you can answer in one minute</p>
+      </div>
       <div className='w-full overflow-x-scroll overflow-y-hidden py-12'>
-        <div className='flex w-[250%] gap-5'>
+        <div className='flex flex-row-reverse w-[250%] gap-5'>
           <div style={worldStyle} className='bg-blue-200 rounded-md overflow-hidden shadow-lg'>
             <h2 className='flex items-center gap-1 text-xl font-medium p-2 bg-blue-800 text-white'><BiWorld /> World</h2>
             <img className='w-full' src="https://www.dreamzone.co.in/blog/wp-content/uploads/2022/06/The-Imagination-of-Superpower-Cartoons.jpg" />
+            <p className='opacity-80 py-2 text-sm font-medium text-black bg-yellow-500 text-center'>This feature is coming soon...</p>
             <p className='px-4 py-8 font-medium text-gray-700'>
               Play against different people from different countries online and get to rank on world leaderboard.
             </p>
@@ -33,7 +37,7 @@ const SelectGame = () => {
           </div>
           <div onClick={() => navigate('/train/game')} className='bg-orange-200 rounded-md overflow-hidden shadow-lg'>
             <h2 className='flex items-center gap-2 text-xl font-medium p-2 bg-orange-800 text-white'><FaUser classNme="text-md" /> Training</h2>
-            <img className='w-full' src="https://i.pinimg.com/originals/b0/41/ed/b041ed6928738a65269be01d7dac2c82.jpg" />
+            <img className='opacity-80 w-full' src="https://i.pinimg.com/originals/b0/41/ed/b041ed6928738a65269be01d7dac2c82.jpg" />
             <p className='px-4 py-8 font-medium text-gray-700'>
               Train yourself solo to get better and faster in simple arithemetics. Let's build for the war against calculators!
             </p>
