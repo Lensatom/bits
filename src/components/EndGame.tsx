@@ -80,7 +80,9 @@ const EndGame = (props:Props) => {
               return (
                 <div key={player.name} className='w-full p-3 flex overflow-hidden justify-between items-center bg-orange-200 rounded-md'>
                   <div className='flex items-center gap-3'>
-                    <div className='w-16 h-16 bg-white rounded-md'></div>
+                    <div className='w-16 h-16 bg-white rounded-md overflow-hidden'>
+                      <img src={player.avatar} className="w-full />
+                    </div>
                     <p className='text-lg font-semibold text-gray-900'>{player.username}</p>
                   </div>
                   <p className='pr-5 text-lg text-orange-600 font-bold'>{player.score}</p>
