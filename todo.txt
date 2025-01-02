@@ -1,0 +1,2 @@
+-> Remove authentication
+-> Change state management system to context API
