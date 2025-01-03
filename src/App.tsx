@@ -8,39 +8,31 @@ import { GetUser, SaveRoom } from './redux/action';
 import { GetData } from './firebase/firestore';
 import { Horj, Host, Join, Game as MultiGame, Room } from './features/multi';
 import { Loader } from './components';
+import { getSavedUsername } from './helpers';
 
 function App() {
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const [isLoading, setIsLoading] = useState(true)
+  // const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    const auth = getAuth();
-    onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        const uid = user.uid;
-        let data = await GetData("users", uid);
-        if (data === null) {
-          navigate("/login")
-        } else {
-          dispatch(GetUser(data))
-          dispatch(SaveRoom(data.gameStatus))
-        }
-      } else {
-        navigate("/login")
-      }
-      setIsLoading(false)
-    })
+    const username = getSavedUsername()
+    if (username) {
+
+    }
   }, [])
 
-  if (isLoading) return <Loader full />
+  // if (isLoading) return <Loader full />
   return (
     <div className='bg-white'>
       <Routes>
-        <Route path="" element={<Home />} />
-        <Route path="login" element={<Login />} />
-        <Route path="register" element={<Register />} />
+        <Route path="" element={<Home />}>
+          <Route path="home" element={<Game />} />
+          <Route path="create" element={<Game />} />
+          <Route path="watch" element={<Game />} />
+          <Route path="about" element={<Game />} />
+        </Route>
         <Route path="selectgame" element={<SelectGame />} />
         <Route path="train">
           <Route path="game" element={<Game />} />

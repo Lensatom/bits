@@ -1,63 +1,52 @@
-import { useState } from 'react'
-import { FaChartBar, FaHome, FaToolbox, FaTrophy } from 'react-icons/fa'
-import Penguin from '../assets/tiger.gif'
-import { NavLink } from 'react-router-dom'
-import { useSelector } from 'react-redux'
-import { Loader } from '../components'
-import { useDispatch } from 'react-redux'
-import { GetUser } from '../redux/action'
+import { NavLink } from "react-router-dom"
+
 
 const Home = () => {
+  const navs = [
+    {
+      name: "Home",
+      route: "/"
+    },
+    {
+      name: "Create",
+      route: "/create"
+    },
+    {
+      name: "Watch",
+      route: "/watch"
+    },
+    {
+      name: "About",
+      route: "/about"
+    }
+  ]
 
-  const dispatch = useDispatch()
-  const [status, setStatus] = useState("")
-  const state:any = useSelector((state:any) => state.userData)
-
-  const letsGo = () => {
-    setStatus("Ready!");
-    dispatch(GetUser({
-      ...state,
-      fetched: true
-    }))
-  }
-
-  if (status === "Ready!" || state?.fetched === true) {
-    return (
-      <div className='w-full h-screen flex flex-col justify-between'>
-        <div className='py-3 text-white bg-orange-700 px-3 flex justify-between items-center'>
-          <FaToolbox />
-          <p className='flex items-center gap-1'>
-            <FaTrophy />
-            <span>500</span>
-          </p>
-          <FaChartBar />
-        </div>
-        <div className='h-full flex flex-col justify-center items-center gap-4'>
-          <h2 className='text-3xl font-bold'>Hello {state.username}</h2>
-          <img src={Penguin} className='w-72' />
-          <p className='text-center px-8'>
-            Welcome back. Our war against calculators continue today.
-            We are not stopping till we win. Let's go champ!
-          </p>
-          <NavLink to="/selectgame" className='bg-orange-700 py-4 px-8 text-white font-medium text-lg rounded-lg'>Start Game</NavLink>
-        </div>
-        <div className='bg-gray-800 text-white px-3 py-4 flex justify-center gap-24 text-xl'>
-          <FaHome />
+  return (
+    <div className="bg-bg w-full h-screen flex">
+      <div className="h-screen w-[15%] bg-black/5 flex flex-col p-6 justify-between">
+        <h1 className="text-lg font-extrabold text-primary">Bits.</h1>
+        <nav className="border-l-[1px] border-primary/20 py-16">
+          <ul className="flex flex-col gap-6">
+            {navs.map((nav, i) => (
+              <li key={i}>
+                <NavLink
+                  to={nav.route}
+                  className={({isActive}) => `pl-4 ${isActive ? "border-l-primary" : "border-l-transparent"} border-l-[1px] ml-[-1px] text-grey.1 text-sm font-bold hover:pl-6 transition-all`}
+                >{nav.name}</NavLink>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <div className="h-[20%] flex flex-col justify-end">
+          <span className="text-grey.1 text-sm">&copy; 2024</span>
         </div>
       </div>
-    )
-  }
-  return (
-    <div className='w-full h-screen flex flex-col justify-center items-center'>
-      <h2 className='text-5xl font-bold text-orange-700 flex'>Uclid</h2>
-      <p className='mt-1'>Built by Lens with ❤</p>
-      {
-        state === null ?
-        <div className='absolute bottom-16 w-16 h-16'>
-          <Loader />
-        </div> :
-        <button onClick={letsGo} className='absolute animate-pulse bottom-16 bg-orange-700 py-4 px-8 text-white font-medium text-lg rounded-lg'>Let's Go!</button>
-      }
+      <div className="p-6 w-[70%]">
+        <div className="flex items-center justify-between">
+          <input className="border-[1px] rounded-full border-primary/40 text-grey.1 bg-bg py-2 px-6 w-[50%] focus:outline-none" />
+          <div className="w-10 h-10 rounded-full bg-grey.1"></div>
+        </div>
+      </div>
     </div>
   )
 }
