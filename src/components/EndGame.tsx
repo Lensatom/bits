@@ -1,11 +1,11 @@
 import { AiFillStar } from 'react-icons/ai'
 import { FaArrowLeft } from 'react-icons/fa'
 import { MdRestartAlt } from 'react-icons/md'
-import Button from './Button'
 import { NavLink } from 'react-router-dom'
 import { onSnapshot } from 'firebase/firestore'
 import { useEffect, useState } from 'react'
 import { GetPlayers } from '../firebase/firestore'
+import { Button } from './base'
 
 type Props = {
   variant: "train" | "multi" | "world"
@@ -53,12 +53,12 @@ const EndGame = (props:Props) => {
           <p className='font-semibold text-orange-200 mt-1'>Points</p>
         </div>
         <div className='flex justify-between px-12 mt-[-40px]'>
-          <Button type="click" status="active" className='!rounded-full !h-28 !w-28 border-8 border-white'>
+          <Button className='!rounded-full !h-28 !w-28 border-8 border-white'>
             <NavLink to="/selectGame" className="flex justify-center items-center">
               <FaArrowLeft className="text-xl" />
             </NavLink>
           </Button>
-          <Button type="click" func={restartGame} status="active" className='!rounded-full !h-28 !w-28 border-8 border-white flex justify-center items-center'>
+          <Button className='!rounded-full !h-28 !w-28 border-8 border-white flex justify-center items-center'>
             <MdRestartAlt className="text-2xl" />
           </Button>
         </div>
@@ -92,14 +92,14 @@ const EndGame = (props:Props) => {
           </div>
         </div>
         <div className='flex justify-between px-12 mt-[-40px]'>
-          <Button type="click" status="active" className='!rounded-full !h-28 !w-28 border-8 border-white'>
+          {/* <Button type="click" status="active" className='!rounded-full !h-28 !w-28 border-8 border-white'>
             <NavLink to="/selectGame" className="flex justify-center items-center">
               <FaArrowLeft className="text-xl" />
             </NavLink>
           </Button>
           <Button type="click" func={restartGame} status="active" className='!rounded-full !h-28 !w-28 border-8 border-white flex justify-center items-center'>
             <MdRestartAlt className="text-2xl" />
-          </Button>
+          </Button> */}
         </div>
       </div>
     )

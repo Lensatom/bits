@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import Button from "../../../components/Button";
+// import Button from "../../../components/Button";
 import Player from "./Player";
 import { GetData, UpdateData } from "../../../firebase/firestore";
 
@@ -40,7 +40,7 @@ const RoomGuestUI = (props:Props) => {
           )
         })}
       </div>
-      <Button type="click" func={iAmReady} status={ready ? "inActive" : "active"} content={ready ? "Waiting..." : "Ready"} />
+      {/* <Button type="click" func={iAmReady} status={ready ? "inActive" : "active"} content={ready ? "Waiting..." : "Ready"} /> */}
     </div>
   )
 }

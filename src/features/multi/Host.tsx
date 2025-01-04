@@ -5,7 +5,7 @@ import { AddData, DeleteData, GetPlayers } from '../../firebase/firestore'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { SaveRoom } from '../../redux/action'
-import Button from '../../components/Button'
+// import Button from '../../components/Button'
 import { InputField } from '../../components'
 import { onSnapshot } from 'firebase/firestore'
 
@@ -76,7 +76,7 @@ const Host = () => {
         <input required disabled value={host.username} className="rounded-md p-3 bg-gray-200" />
         <span className='mt-1 mb-5 px-3 text-xs text-gray-400 font-medium'>You cannot edit your room title</span>
         <InputField value={passcode} func={setPasscode} type="text" label="Passcode" error={error} />
-        <Button type="submit" content="Create Room" func={submit} status={buttonStatus} className='mt-5' />
+        {/* <Button type="submit" content="Create Room" func={submit} status={buttonStatus} className='mt-5' /> */}
       </form>
     </div>
   )

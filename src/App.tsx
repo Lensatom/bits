@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Routes, Route, useNavigate } from 'react-router-dom'
-import { Home, Login, Register, SelectGame } from './features'
+import { SelectGame } from './features'
 import { Game } from './features/training'
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useDispatch } from 'react-redux';
@@ -9,11 +9,10 @@ import { GetData } from './firebase/firestore';
 import { Horj, Host, Join, Game as MultiGame, Room } from './features/multi';
 import { Loader } from './components';
 import { getSavedUsername } from './helpers';
+import { LayoutHome } from './layouts';
+import { Home } from './features/home';
 
 function App() {
-
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
   // const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
@@ -27,8 +26,8 @@ function App() {
   return (
     <div className='bg-white'>
       <Routes>
-        <Route path="" element={<Home />}>
-          <Route path="home" element={<Game />} />
+        <Route path="" element={<LayoutHome />}>
+          <Route path="" element={<Home />} />
           <Route path="create" element={<Game />} />
           <Route path="watch" element={<Game />} />
           <Route path="about" element={<Game />} />

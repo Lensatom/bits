@@ -1,7 +1,7 @@
-import { NavLink } from "react-router-dom"
+import { NavLink, Outlet } from "react-router-dom"
 
 
-const Home = () => {
+const LayoutHome = () => {
   const navs = [
     {
       name: "Home",
@@ -42,13 +42,10 @@ const Home = () => {
         </div>
       </div>
       <div className="p-6 w-[70%]">
-        <div className="flex items-center justify-between">
-          <input className="border-[1px] rounded-full border-primary/40 text-grey.1 bg-bg py-2 px-6 w-[50%] focus:outline-none" />
-          <div className="w-10 h-10 rounded-full bg-grey.1"></div>
-        </div>
+        <Outlet />
       </div>
     </div>
   )
 }
 
-export default Home
+export default LayoutHome

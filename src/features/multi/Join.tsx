@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { useDispatch } from "react-redux";
 import { SaveRoom } from "../../redux/action";
 import { InputField } from "../../components";
-import Button from "../../components/Button";
+// import Button from "../../components/Button";
 import { AddData, GetRoom } from "../../firebase/firestore";
 import { onSnapshot } from "firebase/firestore";
 import { useSelector } from "react-redux";
@@ -70,7 +70,7 @@ const Join = () => {
       <form onSubmit={submit} className="flex flex-col gap-5">
         <InputField label="Room Title" value={title} func={setTitle} error={error} className="rounded-md p-3 bg-gray-200" />
         <InputField label="Room Passcode" value={passcode} func={setPasscode} error={error} className="rounded-md p-3 bg-gray-200" />
-        <Button type="submit" func={submit} content="Join Room" status={buttonStatus} />
+        {/* <Button type="submit" func={submit} content="Join Room" status={buttonStatus} /> */}
       </form>
     </div>
   )

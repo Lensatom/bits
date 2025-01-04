@@ -47,3 +47,8 @@ td, th {
   padding: 0px 0px 0px 4px;
   border-left: 1px solid black;
 }
+@layer base {
+  :root {
+    --radius: 0.5rem
+  }
+}
